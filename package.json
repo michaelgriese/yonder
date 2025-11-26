@@ -1,0 +1,23 @@
+{
+    "name": "yonder",
+    "version": "1.0.0",
+    "description": "yonder description",
+    "main": "src/app.js",
+    "scripts": {
+        "start": "live-server --port=3000 --host=localhost --open=/",
+        "build": "echo 'No build process needed for vanilla JS'",
+        "dev": "live-server --port=3000 --host=localhost --open=/ --watch=src/,index.html,style.css"
+    },
+    "keywords": [
+        "javascript",
+        "yonder"
+    ],
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "live-server": "^1.2.2"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    }
+}
