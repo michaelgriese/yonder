@@ -3,30 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>netwiz</title>
+    <title>NET FLASH: RELOADED</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
         <header class="header">
+            <div id="header-img"><img src="content/images/world.gif" alt="World"></div>
+            <div id="header-title"><a href="index.html"><div>NET FLASH</div></a></div>
+        </header>
+
+        <main class="main">
             <nav class="nav">
-                <h1 class="nav-brand">my app</h1>
                 <ul class="nav-links">
                     <li><a href="#home" class="nav-link" data-route="home">Home</a></li>
+                    <li><a href="#browse" class="nav-link" data-route="browse">Browse</a></li>
                     <li><a href="#about" class="nav-link" data-route="about">About</a></li>
                     <li><a href="#contact" class="nav-link" data-route="contact">Contact</a></li>
                 </ul>
             </nav>
-        </header>
-
-        <main class="main">
             <div id="content" class="content">
 
             </div>
         </main>
 
         <footer class="footer">
-            <p>&copy; 2025 my app</p>
+            <p>LAST UPDATED <span id="last-updated"></span></p>
+            <script>
+                document.getElementById('last-updated').textContent = new Date(document.lastModified).toLocaleString("en-US", { dateStyle: "long", timeStyle: "short" }).toLocaleUpperCase();
+            </script>
+            <p>&copy;<span id="copyright-year"></span> NET FLASH</p>
+            <script>
+                document.getElementById('copyright-year').textContent = new Date().getFullYear();
+            </script>
         </footer>
     </div>
 

@@ -1,4 +1,3 @@
-// Main application logic
 class App {
     constructor() {
         this.content = document.getElementById('content');
@@ -10,6 +9,11 @@ class App {
         router.addRoute('home', () => this.renderPage(Pages.home()));
         router.addRoute('about', () => this.renderPage(Pages.about()));
         router.addRoute('contact', () => this.renderPage(Pages.contact()));
+
+        router.addRoute('browse', async () => {
+            const res = await Pages.browse();
+            this.renderPage(res);
+        })
     }
 
     setupEventListeners() {
@@ -34,6 +38,7 @@ class App {
     updatePageTitle() {
         const routeTitles = {
             'home': 'Home',
+            'browse': 'Browse',
             'about': 'About',
             'contact': 'Contact'
         };
@@ -57,12 +62,9 @@ class App {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
         }, 2000);
-
-        console.log('Form submitted', data);
     }
 
     init() {
-        console.log('Framework initialized');
         router.init();
     }
 }

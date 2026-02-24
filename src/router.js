@@ -4,14 +4,14 @@ class Router {
         this.currentRoute = null;
 
         window.addEventListener('popstate', () => {
-            this.handleRoute();
+            this.handleRoute().catch(err => console.error(err));
         });
 
         document.addEventListener('click', (e) => {
             if (e.target.matches('[data-route]')) {
                 e.preventDefault();
                 const route = e.target.getAttribute('data-route');
-                this.navigateTo(route);
+                this.navigateTo(route).catch(err => console.error(err));
             }
         });
     }
@@ -20,21 +20,26 @@ class Router {
         this.routes[path] = handler;
     }
 
-    navigateTo(route) {
+    async navigateTo(route) {
         if (this.routes[route]) {
             this.currentRoute = route;
             history.pushState({}, '', `#${route}`);
             this.updateActiveNav(route);
-            this.routes[route]();
+            try {
+                const res = await this.routes[route]();
+                return res;
+            } catch (err) {
+                console.error(`Error in route handler for '${route}':`, err);
+            }
         } else {
             console.warn(`Route '${route}' not found`);
-            this.navigateTo('home');
+            await this.navigateTo('home');
         }
     }
 
-    handleRoute() {
+    async handleRoute() {
         const hash = window.location.hash.slice(1) || 'home';
-        this.navigateTo(hash);
+        await this.navigateTo(hash);
     }
 
     updateActiveNav(activeRoute) {
@@ -46,8 +51,12 @@ class Router {
         });
     }
 
-    init() {
-        this.handleRoute();
+    async init() {
+        try {
+            await this.handleRoute();
+        } catch (err) {
+            console.error(err);
+        }
     }
 }
 

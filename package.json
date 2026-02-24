@@ -5,6 +5,7 @@
     "main": "src/app.js",
     "scripts": {
         "start": "live-server --port=3000 --host=localhost --open=/",
+        "start:node": "node server.js",
         "build": "echo 'No build process needed for vanilla JS'",
         "dev": "live-server --port=3000 --host=localhost --open=/ --watch=src/,index.html,style.css"
     },
@@ -19,5 +20,8 @@
     },
     "engines": {
         "node": ">=14.0.0"
+    },
+    "dependencies": {
+        "express": "^5.2.1"
     }
 }
