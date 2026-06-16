@@ -30,7 +30,7 @@ class Pages {
 
     static async browse() {
         var html = await fetchContent() 
-        return Components.renderPage('Browse', Components.renderCard(html)); // I am getting html variable to be valid but shows up on DOM as undefined or promise
+        return Components.renderPage('Browse', Components.renderCard(html));
     }
 
     static about() {
