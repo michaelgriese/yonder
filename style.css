@@ -98,3 +98,11 @@ footer > p {
 .content {
     padding: 16px;
 }
+
+.file-list {
+    padding-left: 4px;
+}
+
+.file-list-item {
+    list-style-type: none;
+}

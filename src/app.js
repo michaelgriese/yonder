@@ -10,10 +10,16 @@ class App {
         router.addRoute('about', () => this.renderPage(Pages.about()));
         router.addRoute('contact', () => this.renderPage(Pages.contact()));
 
-        router.addRoute('browse', async () => {
-            const res = await Pages.browse();
-            this.renderPage(res);
-        })
+        // 'browse' handler accepts optional filename parameter
+        router.addRoute('browse', async (filename) => {
+            if (filename) {
+                const res = await Pages.viewPost(filename);
+                this.renderPage(res);
+            } else {
+                const res = await Pages.browse();
+                this.renderPage(res);
+            }
+        });
     }
 
     setupEventListeners() {
@@ -43,7 +49,7 @@ class App {
             'contact': 'Contact'
         };
 
-        document.title = routeTitles[router.currentRoute] || 'Home';
+    document.title = routeTitles[router.currentRoute?.split?.('/')?.[0]] || 'Home';
     }
 
     handleFormSubmit(form) {
