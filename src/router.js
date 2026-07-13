@@ -21,12 +21,16 @@ class Router {
     }
 
     async navigateTo(route) {
-        if (this.routes[route]) {
+        const [base, ...rest] = (route || '').split('/');
+        const param = rest.length ? rest.join('/') : undefined;
+        const handler = this.routes[route] || this.routes[base];
+
+        if (handler) {
             this.currentRoute = route;
             history.pushState({}, '', `#${route}`);
-            this.updateActiveNav(route);
+            this.updateActiveNav(base);
             try {
-                const res = await this.routes[route]();
+                const res = await handler(param);
                 return res;
             } catch (err) {
                 console.error(`Error in route handler for '${route}':`, err);
